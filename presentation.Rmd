@@ -9,3 +9,22 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(purrr)
+```
+
+
+```{r}
+xmax <- 10
+N0 <- 25
+r <- seq(-1, 1, .1)
+cols <- colorRampPalette(RColorBrewer::brewer.pal(11, "Spectral"))(length(r))
+
+xs <- seq(0, xmax, le = 500)
+plot(NA, xlim = c(0, xmax), ylim = c(0, 70), xlab = "time",
+     ylab = "bacterial concentration")
+walk2(r, cols, ~ lines(xs, N0 * exp(.x * xs), col = .y, lwd = 3))
+
+image(matrix(seq_along(r), 1), col = cols)
+```
+
